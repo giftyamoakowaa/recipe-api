@@ -1,8 +1,15 @@
 import express from "express";
+import mongoose from "mongoose";
 import recipeRouter from "./routes/recipes.js";
+
+// Connect to database
+await mongoose.connect(process.env.MONGO_URL);
 
 // Create Express APP
 const app = express();
+
+// Apply middleware
+app.use(express.json());
 
 // Define routes
 app.get('/', (req, res)=> { res.json('Welcome home')})
