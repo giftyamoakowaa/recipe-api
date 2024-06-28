@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import recipeRouter from "./routes/recipes.js";
-
+import categoryRouter from "./routes/category.js";
 // Connect to database
 await mongoose.connect(process.env.MONGO_URL);
 
@@ -15,7 +15,7 @@ app.use(express.json());
 
 // use routes
 app.use(recipeRouter);
-
+app.use(categoryRouter);
 
 app.patch('/sign', (req, res) => 
     { res.json('sign up');
@@ -23,6 +23,7 @@ app.patch('/sign', (req, res) =>
 });
 
 // Listen for incoming request
-app.listen(3000, () => {
-    console.log('App listening on port 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
 });
