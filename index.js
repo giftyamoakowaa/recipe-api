@@ -5,11 +5,13 @@ import categoryRouter from "./routes/category.js";
 // Connect to database
 await mongoose.connect(process.env.MONGO_URL);
 
+
 // Create Express APP
 const app = express();
 
 // Apply middleware
 app.use(express.json());
+app.use(express.static('uploads'));
 
 
 

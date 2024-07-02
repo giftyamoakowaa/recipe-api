@@ -14,7 +14,10 @@ export const getCategories = async (req, res, next) => {
 export const postCategories = async (req, res, next) => {
     try{
     // Get all categories from database
-    const newCategories = await categoryModel.create(req.body);
+    const newCategories = await categoryModel.create({
+        ...req.body,
+        image:req.file.filename
+    });
     // Return respomse
     res.json(newCategories);
     } catch (error) {
