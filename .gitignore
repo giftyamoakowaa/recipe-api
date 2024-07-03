@@ -2,3 +2,4 @@ node_modules
 package-look.json
 yarn.lock
 .env
+uploads

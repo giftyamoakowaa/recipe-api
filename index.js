@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import recipeRouter from "./routes/recipes.js";
 import categoryRouter from "./routes/category.js";
@@ -10,6 +11,7 @@ await mongoose.connect(process.env.MONGO_URL);
 const app = express();
 
 // Apply middleware
+app.use(cors ());
 app.use(express.json());
 app.use(express.static('uploads'));
 
