@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import recipeRouter from "./routes/recipes.js";
 import categoryRouter from "./routes/category.js";
 import expressOasGenerator from "express-oas-generator";
+import session from "express-session";
+import userRouter from "./routes/user.js";
 // Connect to database
 await mongoose.connect(process.env.MONGO_URL);
 
@@ -20,10 +22,17 @@ expressOasGenerator.handleResponses(app, {
 app.use(cors ());
 app.use(express.json());
 app.use(express.static('uploads'));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+
+}))
 
 
 
 // use routes
+app.use(userRouter);
 app.use(recipeRouter);
 app.use(categoryRouter);
 expressOasGenerator.handleRequests();
