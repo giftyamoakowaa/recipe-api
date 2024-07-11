@@ -8,7 +8,7 @@ import { checkUserSession } from "../middleware/auth.js";
 const recipeRouter = Router();
 
 // Apply middlewares
-recipeRouter.use(checkUserSession);
+// recipeRouter.use(checkUserSession);
 
 // Define routes
 recipeRouter.get('/recipes', getRecipes);

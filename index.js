@@ -6,8 +6,11 @@ import categoryRouter from "./routes/category.js";
 import expressOasGenerator from "express-oas-generator";
 import session from "express-session";
 import userRouter from "./routes/user.js";
+import MongoStore from "connect-mongo";
 // Connect to database
 await mongoose.connect(process.env.MONGO_URL);
+
+
 
 
 // Create Express APP
@@ -25,7 +28,12 @@ app.use(express.static('uploads'));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    // cookie: {secure: true},
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URL
+    })
+    
 
 }))
 
